@@ -2,29 +2,36 @@ package controle;
 
 import java.util.ArrayList;
 
-import dao.ProdutoDAO;
+
 import modelo.Produto;
+import dao.ProdutoDAO;
 
-public class ProcessaProduto {
+public class ProdutoProcess {
 
+	public static ArrayList<Produto> produtos = new ArrayList<>();
 	private static ProdutoDAO pd = new ProdutoDAO();
-	private static ArrayList<Produto> produtos = pd.ler();
 
-	public static ArrayList<Produto> getProdutos() {
-		return produtos;
+	public static void abrir() {
+		produtos = pd.ler();
 	}
 
-	public static void setProdutos(ArrayList<Produto> produtos) {
-		ProcessaProduto.produtos = produtos;
+	public static void salvar() {
 		pd.escrever(produtos);
 	}
 
 	public static ProdutoDAO getPd() {
 		return pd;
 	}
-
 	public static void setPd(ProdutoDAO pd) {
-		ProcessaProduto.pd = pd;
+		ProdutoProcess.pd = pd;
+	}
+	public static ArrayList<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public static void setProdutos(ArrayList<Produto> produtos) {
+		ProdutoProcess.produtos = produtos;
+		pd.escrever(produtos);
 	}
 
 	public static Produto getProduto(int codigo) {
@@ -36,10 +43,10 @@ public class ProcessaProduto {
 	}
 
 	public static int getAutoCodigo() {
-		if (ProcessaProduto.produtos.isEmpty())
+		if (ProdutoProcess.produtos.isEmpty())
 			return 1;
 		else
-			return ProcessaProduto.produtos.get(ProcessaProduto.produtos.size() - 1).getCodProduto() + 1;
+			return ProdutoProcess.produtos.get(ProdutoProcess.produtos.size() - 1).getCodProduto() + 1;
 	}
 
 	public static int getTotalItens() {

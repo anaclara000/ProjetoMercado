@@ -1,4 +1,4 @@
-package modelo.dao;
+package dao;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -16,17 +16,15 @@ import modelo.Produto;
 
 public class ProdutoDAO {
 
-	private BufferedReader br;
+	private static BufferedReader br;
 	private BufferedWriter bw;
 	private BufferedImage bi;
-	private Produto produto;
-	private String arquivo = System.getProperty("user.dir")+"\\bd\\produtos.csv";
-	private String caminhoImg = System.getProperty("user.dir")+"\\imgs\\";
+	private static String caminhoImg = System.getProperty("user.dir")+"\\imgs\\";
 	private String path = ".\\dados\\entrada.csv";
+	Produto prod;
 	
 	public ArrayList<Produto> ler() {
 		ArrayList<Produto> linhas = new ArrayList<>();
-		Produto prod;
 		try {
 			br = new BufferedReader(new FileReader(path));
 			String linha = br.readLine();
@@ -57,8 +55,6 @@ public class ProdutoDAO {
 	}
 	public boolean saveImg(Produto p, File imagem) {
 		boolean resultado = false;
-		// String extencaoArquivo =
-		// imagem.getPath().substring(imagem.getPath().lastIndexOf(".")+1,imagem.getPath().length());
 		String extencaoArquivo = "png";
 		String nomeImagem = "produto" + p.getCodProduto() + "." + extencaoArquivo;
 		File arquivoDeSaida = new File(caminhoImg + nomeImagem);
@@ -71,7 +67,8 @@ public class ProdutoDAO {
 		}
 		return resultado;
 	}
-	public String getImgPath(Produto p) {
+
+	public static String getImgPath(Produto p) {
 		String imagem = caminhoImg + "produto" + p.getCodProduto() + ".png";
 		try {
 			br = new BufferedReader(new FileReader(imagem));

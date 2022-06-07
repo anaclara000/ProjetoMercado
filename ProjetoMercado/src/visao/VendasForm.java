@@ -1,5 +1,6 @@
 package visao;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -58,6 +59,7 @@ public class VendasForm extends JDialog implements ActionListener {
 		setBounds(201, 160, 697, 410);
 		setIconImage(new ImageIcon(imgIco).getImage());
 		panel = new JPanel();
+		panel.setBackground(new Color(180,112,54));
 		setContentPane(panel);
 		setLayout(null);
 		numero = ProcessaVenda.getAutoNumero();

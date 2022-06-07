@@ -105,4 +105,3 @@ public class LoginForm extends JFrame implements ActionListener{
 		login.setVisible(true);
 	}
 }
-

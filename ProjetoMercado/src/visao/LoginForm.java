@@ -13,10 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import controle.ProdutoProcess;
 import controle.UsuarioProcessa;
 import uteis.Criptografia;
 
-public class TelaLogin extends JFrame implements ActionListener{
+public class LoginForm extends JFrame implements ActionListener{
 	
 	private static final long serialVersionUID = 1L; 
 	private JPanel painel;
@@ -28,7 +29,7 @@ public class TelaLogin extends JFrame implements ActionListener{
 	private String [] fundo = {".\\assets\\fundo.png"};
 	private ImageIcon icon;
 	
-	TelaLogin() {
+	LoginForm() {
 		setTitle("Tela de Login");
 		setBounds(100, 100, 600, 420);
 		setIconImage(new ImageIcon(imgIco).getImage());
@@ -40,31 +41,27 @@ public class TelaLogin extends JFrame implements ActionListener{
 		
 		rotulo3 = new JLabel("BEM VINDO!");
 		rotulo3.setBounds(260, 200, 100, 20);
-		
 		rotulo4 = new JLabel("Digite o seu usuario e senha:");
 		rotulo4.setBounds(215, 220, 170, 20);
 		
 		rotulo1 = new JLabel("Login");
 		rotulo1.setBounds(180, 250, 100, 20);
-		
 		tfLogin = new JTextField();
 		tfLogin.setBounds(220, 250, 170, 30);
-		
 		rotulo2 = new JLabel ("Senha");
 		rotulo2.setBounds(180, 285, 100, 20);
-		
 		senha = new JPasswordField();
 		senha.setEchoChar('*');
 		senha.setBounds(220, 285, 170, 30);
-		
 		login = new JButton("Login");
 		login.setBounds(220, 320, 170, 30);
-		login.addActionListener(this);
 		
 		lbFundo = new JLabel("");
 		lbFundo.setBounds(5,0,600,210);
 		fundo(0);
 		painel.add(lbFundo);
+		
+		login.addActionListener(this);
 		 
 		painel.add(rotulo3);
 		painel.add(rotulo4);
@@ -88,7 +85,7 @@ public class TelaLogin extends JFrame implements ActionListener{
 				if (indice != -1) {
 					if (UsuarioProcessa.checarSenha(indice, Criptografia.encripta(new String(senha.getPassword())))) {
 						this.dispose();
-						Menu pf = new Menu();
+						TelaPrincipal pf = new TelaPrincipal();
 						pf.setVisible(true);
 					} else {
 						JOptionPane.showMessageDialog(this, "Acesso negado");
@@ -102,8 +99,9 @@ public class TelaLogin extends JFrame implements ActionListener{
 		}
 	}
 	public static void main(String[] args) {
+		ProdutoProcess.abrir();
 		UsuarioProcessa.abrir();
-		TelaLogin login = new TelaLogin();
+		LoginForm login = new LoginForm();
 		login.setVisible(true);
 	}
 }
